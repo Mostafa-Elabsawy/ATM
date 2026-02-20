@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATM Demo</title>
+<link rel="stylesheet" href="./css/all.min.css">
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="d-flex justify-content-center align-items-center text-white" >
+
+<div class="atm w-50  text-center p-5 rounded-4 ">
+
+  <!-- PAGE 1 WELCOME -->
+  <div class="screen active" id="welcome">
+    <h2>Welcome to ATM</h2>
+    <button class="btn btn-success d-block mx-auto w-100" onclick="show('login')">Start</button>
+  </div>
+
+  <!-- PAGE 2 PIN -->
+  <div class="screen" id="login">
+    <h3>Enter Card & pin</h3>
+    <div class="input-group has-validation">
+        <input type="number" class="form-control" id="card" placeholder="Enter Card Number" >
+        <div class="invalid-feedback text-start">Invalid Card Number</div>
+    </div>
+    <div class="input-group has-validation my-3">
+        <input type="password" class="form-control" id="password" placeholder="Enter 4-digit PIN"   pattern="^\d{4}$" >
+        <div class="invalid-feedback text-start">Invalid PIN</div>
+    </div>
+    <h3 class="text-danger fw-light d-none text-start mb-3" id="loginError">Card Not found</h3>
+    <button class="btn btn-success d-block mx-auto w-100" onclick="login()">Confirm</button>
+  </div>
+
+  <!-- PAGE 3 OPTIONS -->
+  <div class="screen " id="options">
+    <h2>Select Service</h2>
+    <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="show('withdraw')">1-Withdraw</button>
+    <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="show('deposit')">2-Deposit</button>
+    <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="showBalance()">3-Check Balance</button>
+    <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="transactionsHistory()">4-Transaction History</button>
+    <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="main();show('welcome')">5 -Exit</button>
+  </div>
+
+  <!-- WITHDRAW PAGE -->
+  <div class="screen" id="withdraw">
+    <h2>Withdraw Amount</h2>
+    <div class="input-group has-validation my-3">
+        <input id="withdrawAmount" class="form-control" type="number"  placeholder="Enter amount">
+        <div class="invalid-feedback text-start">Invalid amount please enter value[50-100] step 50</div>
+    </div>
+    <h3 class="d-none text-start text-danger fw-light mb-2" id="withdrawError" > Low Balance </h3>
+        <button class="btn btn-success d-block mx-auto w-100" onclick="withdraw()">Confirm</button>
+  </div>
+
+  <!-- DEPOSIT PAGE -->
+  <div class="screen" id="deposit">
+    <h2>Deposit Amount</h2>
+    <div class="input-group has-validation my-3">
+      <input id="depositAmount" class="form-control" type="number" placeholder="Enter amount">
+      <div class="invalid-feedback">please enter value[50-10000] step 50</div>
+    </div>
+    <button class="btn btn-success d-block mx-auto w-100" onclick="deposit()">Confirm</button>
+  </div>
+
+  <!-- BALANCE PAGE -->
+  <div class="screen" id="balance">
+    <h2>Your Balance</h2>
+    <h3 id="balanceValue"></h3>
+    <button class="btn btn-success d-block mx-auto w-100" onclick="show('another')">Continue</button>
+  </div>
+
+  <!-- Transaction History Page -->
+  <div class="screen" id="transactions">
+    <h2>Transaction History</h2>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Type</th>
+          <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="transactions_container">
+        </tbody>
+    </table>
+    <button class="btn btn-success d-block mx-auto w-100" onclick="show('another')">
+      Continue
+    </button>
+  </div>
+
+  <!-- SUCCESS PAGE -->
+  <div class="screen" id="success">
+    <h2 id="msg">Operation Successful ✅</h2>
+    <button class="btn btn-success d-block mx-auto w-100" onclick="show('another')">Continue</button>
+  </div>
+
+  <!-- ANOTHER SERVICE -->
+  <div class="screen" id="another">
+    <h2>Do you want another service?</h2>
+    <button class="btn btn-success d-block mx-auto w-100" onclick="show('options')">Yes</button>
+    <button class="btn btn-danger d-block mx-auto w-100 mt-2" onclick="show('welcome')">No</button>
+  </div>
+
+</div>
+
+<script  src="./js/bootstrap.bundle.min.js"></script>
+<script  src="./js/backend.js"></script>
+<script  src="./js/index.js"></script>
+</body>
+</html>

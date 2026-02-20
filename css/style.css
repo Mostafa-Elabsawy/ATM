@@ -1,0 +1,19 @@
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+ }
+body{
+    height:100vh;
+    background-color:#1f2937;
+    /* border: #10b981 solid 4px; */
+}
+  .atm{
+    background:#111827;
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
+  }
+
+
+
+  .screen{ display:none; }
+  .active{ display:block !important; }

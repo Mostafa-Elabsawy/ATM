@@ -1,0 +1,74 @@
+{
+  "users": [
+    {
+      "name": "Alice Johnson",
+      "card": 583912,
+      "password": 4721,
+      "balance": 3210,
+      "transactions": []
+    },
+    {
+      "name": "Michael Smith",
+      "card": 429305,
+      "password": 8534,
+      "balance": 1875,
+      "transactions": []
+    },
+    {
+      "name": "Sara Williams",
+      "card": 768214,
+      "password": 3098,
+      "balance": 2490,
+      "transactions": []
+    },
+    {
+      "name": "Omar Ali",
+      "card": 905617,
+      "password": 1267,
+      "balance": 412,
+      "transactions": []
+    },
+    {
+      "name": "Laila Hassan",
+      "card": 132498,
+      "password": 6842,
+      "balance": 1980,
+      "transactions": []
+    },
+    {
+      "name": "Youssef Karim",
+      "card": 674219,
+      "password": 2350,
+      "balance": 321,
+      "transactions": []
+    },
+    {
+      "name": "Nora Ibrahim",
+      "card": 591703,
+      "password": 9073,
+      "balance": 4100,
+      "transactions": []
+    },
+    {
+      "name": "Adam Farouk",
+      "card": 843126,
+      "password": 5628,
+      "balance": 1225,
+      "transactions": []
+    },
+    {
+      "name": "Mona Khaled",
+      "card": 710294,
+      "password": 3412,
+      "balance": 890,
+      "transactions": []
+    },
+    {
+      "name": "Tamer Said",
+      "card": 362581,
+      "password": 7809,
+      "balance": 2570,
+      "transactions": []
+    }
+  ]
+}
