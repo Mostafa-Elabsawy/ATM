@@ -42,10 +42,11 @@
     <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="transactionsHistory()">4-Transaction History</button>
     <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="main();show('welcome')">5 -Exit</button>
   </div>
-
+  
   <!-- WITHDRAW PAGE -->
   <div class="screen" id="withdraw">
     <h2>Withdraw Amount</h2>
+    <h5>Maxmum Amount 5000 minimum 50 </h5>
     <div class="input-group has-validation my-3">
         <input id="withdrawAmount" class="form-control" type="number"  placeholder="Enter amount">
         <div class="invalid-feedback text-start">Invalid amount please enter value[50-100] step 50</div>
@@ -57,6 +58,7 @@
   <!-- DEPOSIT PAGE -->
   <div class="screen" id="deposit">
     <h2>Deposit Amount</h2>
+    <h5>Maxmum Amount 100000 minnimum 50 </h5>
     <div class="input-group has-validation my-3">
       <input id="depositAmount" class="form-control" type="number" placeholder="Enter amount">
       <div class="invalid-feedback">please enter value[50-10000] step 50</div>
