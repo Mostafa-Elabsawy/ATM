@@ -8,9 +8,8 @@
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/style.css">
 </head>
-<body class="d-flex justify-content-center align-items-center text-white" >
-
-<div class="atm w-50  text-center p-5 rounded-4 ">
+<body class="d-flex justify-content-center align-items-center text-white">
+<div class="atm  text-center p-5 rounded-4 ">
 
   <!-- PAGE 1 WELCOME -->
   <div class="screen active" id="welcome">
@@ -31,6 +30,10 @@
     </div>
     <h3 class="text-danger fw-light d-none text-start mb-3" id="loginError">Card Not found</h3>
     <button class="btn btn-success d-block mx-auto w-100" onclick="login()">Confirm</button>
+    <div class="text-start">
+      <h6 class="m-0 text-warning">Test Card</h6>
+      <h6 class="m-0 text-">Card:<span class="text-info">123456</span>  Pin:<span class="text-info">1234</span></h6>
+    </div>
   </div>
 
   <!-- PAGE 3 OPTIONS -->
@@ -40,7 +43,7 @@
     <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="show('deposit')">2-Deposit</button>
     <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="showBalance()">3-Check Balance</button>
     <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="transactionsHistory()">4-Transaction History</button>
-    <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="main();show('welcome')">5 -Exit</button>
+    <button class="btn btn-success d-block mx-auto w-100 mb-3" onclick="main();show('welcome')">Exit</button>
   </div>
   
   <!-- WITHDRAW PAGE -->
@@ -49,7 +52,7 @@
     <h5>Maxmum Amount 5000 minimum 50 </h5>
     <div class="input-group has-validation my-3">
         <input id="withdrawAmount" class="form-control" type="number"  placeholder="Enter amount">
-        <div class="invalid-feedback text-start">Invalid amount please enter value[50-100] step 50</div>
+        <div class="invalid-feedback text-start">Invalid amount please enter value[50-5000] step 50</div>
     </div>
     <h3 class="d-none text-start text-danger fw-light mb-2" id="withdrawError" > Low Balance </h3>
         <button class="btn btn-success d-block mx-auto w-100" onclick="withdraw()">Confirm</button>
@@ -58,7 +61,7 @@
   <!-- DEPOSIT PAGE -->
   <div class="screen" id="deposit">
     <h2>Deposit Amount</h2>
-    <h5>Maxmum Amount 100000 minnimum 50 </h5>
+    <h5>Maxmum Amount 10000 minnimum 50 </h5>
     <div class="input-group has-validation my-3">
       <input id="depositAmount" class="form-control" type="number" placeholder="Enter amount">
       <div class="invalid-feedback">please enter value[50-10000] step 50</div>
@@ -82,6 +85,7 @@
           <th>Amount</th>
           <th>Type</th>
           <th>Date</th>
+          <th>Time</th>
           </tr>
         </thead>
         <tbody id="transactions_container">
@@ -95,14 +99,19 @@
   <!-- SUCCESS PAGE -->
   <div class="screen" id="success">
     <h2 id="msg">Operation Successful ✅</h2>
-    <button class="btn btn-success d-block mx-auto w-100" onclick="show('another')">Continue</button>
   </div>
 
   <!-- ANOTHER SERVICE -->
   <div class="screen" id="another">
     <h2>Do you want another service?</h2>
     <button class="btn btn-success d-block mx-auto w-100" onclick="show('options')">Yes</button>
-    <button class="btn btn-danger d-block mx-auto w-100 mt-2" onclick="show('welcome')">No</button>
+    <button class="btn btn-danger d-block mx-auto w-100 mt-2" onclick="show('welcome')">Exit</button>
+  </div>
+  <!-- TIME OUT Page -->
+  <div class="screen" id="timeout">
+    <h2 class="text-info">Timer Expired (30 seconds)</h2>
+    <button class="btn btn-success d-block mx-auto w-100" onclick="show('before')">Continue</button>
+    <button class="btn btn-danger d-block mx-auto w-100 mt-2" onclick="show('welcome')">Exit</button>
   </div>
 
 </div>

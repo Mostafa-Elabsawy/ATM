@@ -2,9 +2,9 @@
   "users": [
     {
       "name": "Alice Johnson",
-      "card": 583912,
-      "password": 4721,
-      "balance": 3210,
+      "card": 123456,
+      "password": 1234,
+      "balance": 3000,
       "transactions": []
     },
     {

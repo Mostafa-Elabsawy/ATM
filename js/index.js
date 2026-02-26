@@ -25,25 +25,54 @@ const passwordRegex = /^\d{4}$/;
 const errorLogin = document.querySelector("#loginError");
 const errorWithdraw = document.querySelector("#withdrawError");
 
-const DB = myDB;
 let currentScreen = "welcome";
+let Timer = {
+    timer: null,
+    Start()
+    {
+        console.log('started timer');
+        this.timer = setTimeout(() => { console.log("timeout"); timeout(); }, 20000);    
+    },
+    Stop()
+    {
+        if (this.timer === null)
+            return;
+        console.log('Ended timer');
+        clearTimeout(this.timer);
+        this.timer = null;
+    },
+    Toggle()
+    {
+        console.log('toggle');
+        
+        this.Stop();
+        this.Start();
+    }
+};
+const DB = myDB;
 async function main()
 {
-    await localStorage.removeItem("currentUser");
-    await  DB.intiate().then(() => DB.LoadData()).then(() => console.log("local storge ready"));
+    localStorage.removeItem("currentUser");
+    await DB.intiate().then(() => DB.LoadData()).then(() => console.log("local storge ready"));
 }
 function hideAll()
 {
-    allScreens.forEach(screen =>
-        {
-        screen.classList.remove('active');
-    });
+    allScreens.forEach(screen =>{screen.classList.remove('active');});
 }
 function show(elemntId)
 {
+    if (elemntId === 'welcome')
+        Timer.Stop();
     hideAll();
-    currentScreen = elemntId;
+    if (elemntId === 'before')
+        elemntId=currentScreen;
     document.getElementById(elemntId).classList.add('active');
+    currentScreen = elemntId;
+}
+function timeout()
+{
+    hideAll();
+    document.getElementById('timeout').classList.add('active');
 }
 function Input_State_Toggler(elemnt, isValid) {
   if (isValid) {
@@ -56,9 +85,9 @@ function Input_State_Toggler(elemnt, isValid) {
 }
 function Input_State_Validator(regex, input)
 {
-    let valid = regex.test(input.value);
-    Input_State_Toggler(input, valid);
-    return valid;
+    let state = regex.test(input.value);
+    Input_State_Toggler(input, state);
+    return state;
 }
 async function login()
 {
@@ -68,8 +97,6 @@ async function login()
     if (card_syntax && password_syntax)
     {
         let user = await DB.get_user(Number(card.value), Number(password.value));
-        console.log(user);
-        
         if (user.state)
         {
             localStorage.setItem('currentUser', JSON.stringify(user.user));
@@ -99,13 +126,23 @@ async function withdraw()
         {
             console.log(result);
             show('success');
+            setTimeout(() => {show("another");}, 3000);
+
+            withdrawError.classList.add("d-none");
         }
         else
         {
             withdrawError.classList.remove("d-none");
             withdrawAmount.value = "";
             Input_State_Toggler(withdrawAmount, false);
+            show('withdraw');
         }
+    }
+    else
+    {
+        show('withdraw');
+        withdrawAmount.value = "";
+        Input_State_Toggler(withdrawAmount, false);
     }
 }
 async function deposit()
@@ -121,7 +158,15 @@ async function deposit()
         {
             console.log(result);
             show('success');
+            setTimeout(() => { show('another'); }, 3000);
+            
         }
+    }
+    else
+    {
+        show('deposit');
+        depositAmount.value = "";
+        Input_State_Toggler(depositAmount, false);
     }
 }
 async function showBalance()
@@ -152,6 +197,7 @@ async function transactionsHistory()
             <td>${element.amount}</td>
             <td>${element.type}</td>
             <td>${element.date}</td>
+            <td>${element.time}</td>
             `;
             container.appendChild(record);
         });
@@ -166,5 +212,14 @@ card.addEventListener("input", () => {
 password.addEventListener("input", () => {
   Input_State_Validator(passwordRegex, password);
 });
+let buttons=document.querySelectorAll('button');
+buttons.forEach(button => {
+    button.addEventListener('click', () =>
+    {
+      if(button.textContent!=="Exit")
+      Timer.Toggle();
+  });
+});
+
 main();
 

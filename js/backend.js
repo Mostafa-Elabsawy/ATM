@@ -1,8 +1,7 @@
-
 let myDB = {
     Data: null,
     key: "users",
-  
+
     async intiate()
     {
         if (!localStorage.getItem(this.key))
@@ -16,7 +15,7 @@ let myDB = {
         let users = await JSON.parse(localStorage.getItem(this.key));
         this.Data = users;
         console.log(this.Data);
-        
+
     },
     async update_local_Storge(updatedData)
     {
@@ -27,10 +26,8 @@ let myDB = {
     },
     async get_user(card_number, password)
     {
-        console.log(card_number, password);
-        
-        let index = this.Data.findIndex((user) =>(user.card == card_number && user.password == password));
-            
+        let index = this.Data.findIndex((user) => (user.card == card_number && user.password == password));
+
         let user = this.Data[index];
         let state = user !== undefined ? true : false;
         return { state, user, index };
@@ -41,9 +38,8 @@ let myDB = {
         if (state && user.balance >= amount)
         {
             user.balance -= amount;
-            console.log("current user =",user);
-            
-            user.transactions.unshift({amount,date: new Date(),type: "withdraw",});
+            let { date, time } = this.getDateAndTime();
+            user.transactions.unshift({ amount, date,time, type: "withdraw", });
             await this.update_local_Storge(this.Data);
             return { state: true, balance: user.balance, transactions: user.transactions[0] };
         }
@@ -58,7 +54,8 @@ let myDB = {
         if (state)
         {
             user.balance += amount;
-            user.transactions.unshift({ amount, date: new Date(),type:"deposit" });
+            let { date, time } = this.getDateAndTime();
+            user.transactions.unshift({ amount, date,time, type: "deposit" });
             await this.update_local_Storge(this.Data);
             return { state: true, balance: user.balance, transactions: user.transactions[0] };
         } else
@@ -73,17 +70,30 @@ let myDB = {
             return { state: true, balance: user.balance };
         else
             return { state: false, balance: user ? user.balance : null };
-        
+
     },
     async get_history(card_number, password)
     {
         let { state, user, index } = await this.get_user(card_number, password,);
-        if (state)        
+        if (state)
             return { state: true, transactions: user.transactions };
         else
-            return { state: false, transactions:null };
+            return { state: false, transactions: null };
     },
+    
+    getDateAndTime()
+    {
+        let x=new Date();
+        let day = x.getDate();
+        let month = x.getMonth();
+        let year = x.getFullYear();
+        let hours = x.getHours();
+        let minutes = x.getMinutes();
+        let seconds = x.getSeconds();
+        return {
+            date: `${day}/${month}/${year}`,
+            time: `${hours}:${minutes}:${seconds}`,
+        };
+    }
 }
 // export default my_localStorge;
-
-
