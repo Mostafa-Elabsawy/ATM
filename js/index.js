@@ -199,7 +199,7 @@ async function transactionsHistory()
             <td>${element.date}</td>
             <td>${element.time}</td>
             `;
-            container.appendChild(record);
+            container.replaceChildren(record);
         });
         show("transactions");
     }
