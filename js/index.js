@@ -190,6 +190,7 @@ async function transactionsHistory()
     {
         console.log(result);
         const container = document.querySelector("#transactions_container");
+container.replaceChildren();
         result.transactions.forEach((element) =>
         {
             let record = document.createElement('tr');
@@ -199,7 +200,7 @@ async function transactionsHistory()
             <td>${element.date}</td>
             <td>${element.time}</td>
             `;
-            container.replaceChildren(record);
+            container.appendChild(record);
         });
         show("transactions");
     }
